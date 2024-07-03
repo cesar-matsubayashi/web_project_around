@@ -6,5 +6,17 @@
 .header__logo {
   width: 173px;
   height: 33px;
-  margin-bottom: 41px;
+  margin: 0 0 41px;
+}
+
+@media screen and (max-width: 800px) {
+  .header {
+    padding-top: 28px;
+  }
+
+  .header__logo {
+    width: 126px;
+    height: 24px;
+    margin: 0 0 32px 27px;
+  }
 }
