@@ -3,4 +3,7 @@
   background: #000000;
   padding: 0 calc((100vw - 880px) / 2);
   min-height: 200px;
+  color: #ffffff;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
 }
