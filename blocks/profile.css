@@ -11,9 +11,10 @@
 }
 
 .profile__name-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 10px 18px;
+  align-items: baseline;
   margin-left: 30px;
 }
 
@@ -66,8 +67,8 @@
   }
 
   .profile__name-container {
-    align-items: center;
     margin: 30px 0 0;
+    text-align: center;
   }
 
   .profile__name {
@@ -84,6 +85,7 @@
   .profile__description {
     font-size: 14px;
     line-height: 16.94px;
+    grid-column: span 2;
   }
 
   .profile__add-btn {

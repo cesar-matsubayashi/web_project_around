@@ -22,19 +22,19 @@
   height: 40px;
 }
 
-.popup-conten__close-icon:hover {
+.popup-content__close-icon:hover {
   opacity: 0.6;
 }
 
 @media screen and (max-width: 560px) {
-  .popup-conten__close-icon {
+  .popup-content__close-icon {
     top: calc((100% / 2) - (322px / 2) - 45px);
     left: calc((100% / 2) + (282px / 2) - 26px);
     width: 26px;
     height: 26px;
   }
 
-  .popup-conten__container {
+  .popup-content {
     top: calc((100% / 2) - (322px / 2));
     left: calc((100% / 2) - (282px / 2));
     padding: 25px 22px;
