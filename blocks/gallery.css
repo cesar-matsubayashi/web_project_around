@@ -51,7 +51,7 @@
   opacity: 60%;
 }
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 544px) {
   .gallery {
     margin-top: 36px;
   }

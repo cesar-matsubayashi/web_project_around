@@ -59,7 +59,7 @@
   height: 22px;
 }
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 544px) {
   .profile {
     margin-top: 42px;
     flex-direction: column;
