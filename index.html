@@ -50,122 +50,7 @@
       </section>
 
       <main class="content">
-        <section class="gallery">
-          <div class="gallery__photo-container">
-            <img
-              src="./images/image1.jpg"
-              alt="Image 1"
-              class="gallery__photo"
-            />
-
-            <img
-              src="./images/trash.svg"
-              alt="Excluir"
-              class="gallery__trash"
-            />
-
-            <ul class="gallery__photo-caption">
-              <li class="gallery__title">Vale de Yosemite</li>
-              <li>
-                <img
-                  src="./images/like.svg"
-                  alt="Like"
-                  class="gallery__like-btn gallery__like-btn_active"
-                />
-              </li>
-            </ul>
-          </div>
-
-          <div class="gallery__photo-container">
-            <img
-              src="./images/image2.jpg"
-              alt="Image 2"
-              class="gallery__photo"
-            />
-            <ul class="gallery__photo-caption">
-              <li class="gallery__title">Lago Louise</li>
-              <li>
-                <img
-                  src="./images/like.svg"
-                  alt="Like"
-                  class="gallery__like-btn gallery__like-btn_active"
-                />
-              </li>
-            </ul>
-          </div>
-
-          <div class="gallery__photo-container">
-            <img
-              src="./images/image3.jpg"
-              alt="Image 3"
-              class="gallery__photo"
-            />
-            <ul class="gallery__photo-caption">
-              <li class="gallery__title">Montanhas Carecas</li>
-              <li>
-                <img
-                  src="./images/like.svg"
-                  alt="Like"
-                  class="gallery__like-btn gallery__like-btn_active"
-                />
-              </li>
-            </ul>
-          </div>
-
-          <div class="gallery__photo-container">
-            <img
-              src="./images/image4.jpg"
-              alt="Image 4"
-              class="gallery__photo"
-            />
-            <ul class="gallery__photo-caption">
-              <li class="gallery__title">Latemar</li>
-              <li>
-                <img
-                  src="./images/like.svg"
-                  alt="Like"
-                  class="gallery__like-btn gallery__like-btn_active"
-                />
-              </li>
-            </ul>
-          </div>
-
-          <div class="gallery__photo-container">
-            <img
-              src="./images/image5.jpg"
-              alt="Image 5"
-              class="gallery__photo"
-            />
-            <ul class="gallery__photo-caption">
-              <li class="gallery__title">Parque Nacional</li>
-              <li>
-                <img
-                  src="./images/like.svg"
-                  alt="Like"
-                  class="gallery__like-btn gallery__like-btn_active"
-                />
-              </li>
-            </ul>
-          </div>
-
-          <div class="gallery__photo-container">
-            <img
-              src="./images/image6.jpg"
-              alt="Image 6"
-              class="gallery__photo"
-            />
-            <ul class="gallery__photo-caption">
-              <li class="gallery__title">Lago di Braies</li>
-              <li>
-                <img
-                  src="./images/like.svg"
-                  alt="Like"
-                  class="gallery__like-btn gallery__like-btn_active"
-                />
-              </li>
-            </ul>
-          </div>
-        </section>
+        <section class="gallery"></section>
       </main>
       <footer class="footer">
         <p class="footer__copyright">© 2024 Around The U.S.</p>
@@ -181,7 +66,7 @@
         class="popup-content__close-icon popup-content__close-icon_edit"
       />
 
-      <form class="form">
+      <form class="form form_edit">
         <h2 class="form__title">Editar perfil</h2>
 
         <fieldset class="form__fieldset">
@@ -215,7 +100,7 @@
         class="popup-content__close-icon popup-content__close-icon_add"
       />
 
-      <form class="form">
+      <form class="form form_add">
         <h2 class="form__title">Novo local</h2>
 
         <fieldset class="form__fieldset">
@@ -230,9 +115,9 @@
 
           <input
             type="text"
-            name="link"
-            id="link"
-            class="form__input form__input_el_link"
+            name="url"
+            id="irl"
+            class="form__input form__input_el_url"
             placeholder="Link da imagem"
             required
           />
@@ -241,6 +126,26 @@
         <button type="submit" class="form__button">Criar</button>
       </form>
     </div>
+
+    <template id="card-template">
+      <div class="gallery__card">
+        <img src="" alt="" class="gallery__photo" />
+
+        <img src="./images/trash.svg" alt="Excluir" class="gallery__trash" />
+
+        <ul class="gallery__caption">
+          <li class="gallery__title"></li>
+
+          <li>
+            <img
+              src="./images/like.svg"
+              alt="Like"
+              class="gallery__like-btn gallery__like-btn_active"
+            />
+          </li>
+        </ul>
+      </div>
+    </template>
 
     <script src="./scripts/index.js"></script>
   </body>

@@ -6,7 +6,7 @@
   justify-content: center;
 }
 
-.gallery__photo-container {
+.gallery__card {
   width: 282px;
   height: 361px;
   background-color: #ffffff;
@@ -32,7 +32,7 @@
   right: 15px;
 }
 
-.gallery__photo-caption {
+.gallery__caption {
   list-style-type: none;
   display: flex;
   align-items: center;
@@ -66,7 +66,7 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .gallery__photo-container:nth-child(odd) {
+  .gallery__card:nth-child(odd) {
     justify-self: flex-end;
   }
 }
@@ -78,7 +78,7 @@
     justify-items: center;
   }
 
-  .gallery__photo-container:nth-child(odd) {
+  .gallery__card:nth-child(odd) {
     justify-self: center;
   }
 }
