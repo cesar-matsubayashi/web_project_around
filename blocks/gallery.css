@@ -13,6 +13,7 @@
   border-radius: 10px;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .gallery__photo {
@@ -22,6 +23,15 @@
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
+
+.gallery__trash {
+  width: 18px;
+  height: 19.3px;
+  position: absolute;
+  top: 18px;
+  right: 15px;
+}
+
 .gallery__photo-caption {
   list-style-type: none;
   display: flex;
