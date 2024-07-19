@@ -1,7 +1,7 @@
 .gallery {
   margin-top: 50px;
   display: grid;
-  grid-template-columns: repeat(3, auto);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px 17px;
   justify-content: center;
 }
@@ -53,13 +53,22 @@
 
 @media screen and (max-width: 1024px) {
   .gallery {
-    grid-template-columns: repeat(2, auto);
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gallery__photo-container:nth-child(odd) {
+    justify-self: flex-end;
   }
 }
 
 @media screen and (max-width: 544px) {
   .gallery {
     margin-top: 36px;
-    grid-template-columns: auto;
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .gallery__photo-container:nth-child(odd) {
+    justify-self: center;
   }
 }
