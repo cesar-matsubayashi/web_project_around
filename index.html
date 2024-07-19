@@ -174,11 +174,11 @@
 
     <div class="popup"></div>
 
-    <div class="popup-content">
+    <div class="popup-content popup-content_edit">
       <img
         src="./images/close-icon.svg"
         alt="Close"
-        class="popup-content__close-icon"
+        class="popup-content__close-icon popup-content__close-icon_edit"
       />
 
       <form class="form">
@@ -205,6 +205,40 @@
         </fieldset>
 
         <button type="submit" class="form__button">Salvar</button>
+      </form>
+    </div>
+
+    <div class="popup-content popup-content_add">
+      <img
+        src="./images/close-icon.svg"
+        alt="Close"
+        class="popup-content__close-icon popup-content__close-icon_add"
+      />
+
+      <form class="form">
+        <h2 class="form__title">Novo local</h2>
+
+        <fieldset class="form__fieldset">
+          <input
+            type="text"
+            name="title"
+            id="title"
+            class="form__input form__input_el_title"
+            placeholder="Título"
+            required
+          />
+
+          <input
+            type="text"
+            name="link"
+            id="link"
+            class="form__input form__input_el_link"
+            placeholder="Link da imagem"
+            required
+          />
+        </fieldset>
+
+        <button type="submit" class="form__button">Criar</button>
       </form>
     </div>
 

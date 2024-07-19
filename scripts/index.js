@@ -1,9 +1,12 @@
 const editBtn = document.querySelector(".profile__edit-btn");
-const closeBtn = document.querySelector(".popup-content__close-icon");
+const editCloseBtn = document.querySelector(".popup-content__close-icon_edit");
+
+const addBtn = document.querySelector(".profile__add-btn");
+const addCloseBtn = document.querySelector(".popup-content__close-icon_add");
 
 function toggleEditPopup() {
   const popup = document.querySelector(".popup");
-  const popupContent = document.querySelector(".popup-content");
+  const popupContent = document.querySelector(".popup-content_edit");
 
   popup.classList.toggle("popup_opened");
   popupContent.classList.toggle("popup-content_opened");
@@ -22,8 +25,19 @@ function toggleEditPopup() {
   }
 }
 
+function toggleAddPopup() {
+  const popup = document.querySelector(".popup");
+  const popupContent = document.querySelector(".popup-content_add");
+
+  popup.classList.toggle("popup_opened");
+  popupContent.classList.toggle("popup-content_opened");
+}
+
 editBtn.addEventListener("click", toggleEditPopup);
-closeBtn.addEventListener("click", toggleEditPopup);
+editCloseBtn.addEventListener("click", toggleEditPopup);
+
+addBtn.addEventListener("click", toggleAddPopup);
+addCloseBtn.addEventListener("click", toggleAddPopup);
 
 const form = document.querySelector(".form");
 
