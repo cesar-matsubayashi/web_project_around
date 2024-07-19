@@ -114,3 +114,16 @@ const initialCards = [
 ];
 
 initialCards.forEach((card) => addCard(card.name, card.link));
+
+const likeBtn = document.querySelector(".gallery__like-btn");
+likeBtn.addEventListener("click", toggleLike);
+
+function toggleLike() {
+  if (likeBtn.classList.contains("gallery__like-btn_active")) {
+    likeBtn.src = " ../images/like.svg";
+  } else {
+    likeBtn.src = " ../images/like-active.svg";
+  }
+
+  likeBtn.classList.toggle("gallery__like-btn_active");
+}
