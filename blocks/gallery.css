@@ -32,6 +32,10 @@
   right: 15px;
 }
 
+.gallery__trash:hover {
+  opacity: 60%;
+}
+
 .gallery__caption {
   list-style-type: none;
   display: flex;

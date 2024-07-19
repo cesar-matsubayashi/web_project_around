@@ -60,6 +60,13 @@ function toggleAddPopup() {
 }
 
 const gallery = document.querySelector(".gallery");
+gallery.addEventListener("click", (evt) => {
+  if (evt.target.classList.contains("gallery__trash")) {
+    const card = evt.target.closest(".gallery__card");
+    card.remove();
+  }
+});
+
 const addForm = document.querySelector(".form_add");
 addForm.addEventListener("submit", handleProfileAddFormSubmit);
 
