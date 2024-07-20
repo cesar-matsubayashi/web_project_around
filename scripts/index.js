@@ -1,3 +1,6 @@
+const popup = document.querySelector(".popup");
+// popup.addEventListener("click", (evt) => {});
+
 const editBtn = document.querySelector(".profile__edit-btn");
 editBtn.addEventListener("click", toggleEditPopup);
 
@@ -5,7 +8,6 @@ const editCloseBtn = document.querySelector(".popup-content__close-icon_edit");
 editCloseBtn.addEventListener("click", toggleEditPopup);
 
 function toggleEditPopup() {
-  const popup = document.querySelector(".popup");
   const popupContent = document.querySelector(".popup-content_edit");
 
   popup.classList.toggle("popup_opened");
@@ -52,7 +54,6 @@ const addCloseBtn = document.querySelector(".popup-content__close-icon_add");
 addCloseBtn.addEventListener("click", toggleAddPopup);
 
 function toggleAddPopup() {
-  const popup = document.querySelector(".popup");
   const popupContent = document.querySelector(".popup-content_add");
 
   popup.classList.toggle("popup_opened");
@@ -61,11 +62,46 @@ function toggleAddPopup() {
 
 const gallery = document.querySelector(".gallery");
 gallery.addEventListener("click", (evt) => {
-  if (evt.target.classList.contains("gallery__trash")) {
-    const card = evt.target.closest(".gallery__card");
-    card.remove();
+  const targetClass = evt.target.className;
+  const card = evt.target.closest(".gallery__card");
+
+  switch (targetClass) {
+    case "gallery__trash":
+      card.remove();
+      break;
+
+    case "gallery__photo":
+      const imageUrl = evt.target.src;
+      const imageTitle = card.querySelector(".gallery__title").textContent;
+      popup.classList.toggle("popup_opened");
+      createImagePopup(imageUrl, imageTitle);
   }
 });
+
+function createImagePopup(url, title) {
+  const imagePopupTemplate = document.querySelector(
+    "#popup-image-template"
+  ).content;
+  const imagePopupElement = imagePopupTemplate
+    .querySelector(".popup-image")
+    .cloneNode(true);
+  const imagePopupClose = imagePopupElement.querySelector(
+    ".popup-image__close-icon"
+  );
+
+  imagePopupClose.addEventListener("click", (evt) => {
+    imagePopupElement.remove();
+    popup.classList.toggle("popup_opened");
+  });
+
+  imagePopupElement.querySelector(".popup-image__photo").src = url;
+  imagePopupElement.querySelector(
+    ".popup-image__photo"
+  ).alt = `Imagem ${title}`;
+  imagePopupElement.querySelector(".popup-image__title").textContent = title;
+
+  popup.after(imagePopupElement);
+}
 
 const addForm = document.querySelector(".form_add");
 addForm.addEventListener("submit", handleProfileAddFormSubmit);
