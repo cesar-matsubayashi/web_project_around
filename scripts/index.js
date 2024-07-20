@@ -1,17 +1,16 @@
 const popup = document.querySelector(".popup");
-// popup.addEventListener("click", (evt) => {});
 
 const editBtn = document.querySelector(".profile__edit-btn");
 editBtn.addEventListener("click", toggleEditPopup);
 
-const editCloseBtn = document.querySelector(".popup-content__close-icon_edit");
+const editCloseBtn = document.querySelector(".popup-form__close-icon_edit");
 editCloseBtn.addEventListener("click", toggleEditPopup);
 
 function toggleEditPopup() {
-  const popupContent = document.querySelector(".popup-content_edit");
+  const popupContent = document.querySelector(".popup-form_edit");
 
   popup.classList.toggle("popup_opened");
-  popupContent.classList.toggle("popup-content_opened");
+  popupContent.classList.toggle("popup-form_opened");
 
   if (popup.classList.contains("popup")) {
     const profileName = document.querySelector(".profile__name");
@@ -50,14 +49,14 @@ function handleProfileEditFormSubmit(evt) {
 const addBtn = document.querySelector(".profile__add-btn");
 addBtn.addEventListener("click", toggleAddPopup);
 
-const addCloseBtn = document.querySelector(".popup-content__close-icon_add");
+const addCloseBtn = document.querySelector(".popup-form__close-icon_add");
 addCloseBtn.addEventListener("click", toggleAddPopup);
 
 function toggleAddPopup() {
-  const popupContent = document.querySelector(".popup-content_add");
+  const popupContent = document.querySelector(".popup-form_add");
 
   popup.classList.toggle("popup_opened");
-  popupContent.classList.toggle("popup-content_opened");
+  popupContent.classList.toggle("popup-form_opened");
 }
 
 const gallery = document.querySelector(".gallery");
