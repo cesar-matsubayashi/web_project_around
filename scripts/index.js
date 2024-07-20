@@ -61,7 +61,7 @@ function toggleAddPopup() {
 
 const gallery = document.querySelector(".gallery");
 gallery.addEventListener("click", (evt) => {
-  const targetClass = evt.target.className;
+  const targetClass = evt.target.classList[0];
   const card = evt.target.closest(".gallery__card");
 
   switch (targetClass) {
@@ -74,6 +74,19 @@ gallery.addEventListener("click", (evt) => {
       const imageTitle = card.querySelector(".gallery__title").textContent;
       popup.classList.toggle("popup_opened");
       createImagePopup(imageUrl, imageTitle);
+      break;
+
+    case "gallery__like-btn":
+      const like = evt.target;
+
+      if (like.classList.contains("gallery__like-btn_active")) {
+        like.src = " ../images/like.svg";
+      } else {
+        like.src = " ../images/like-active.svg";
+      }
+
+      like.classList.toggle("gallery__like-btn_active");
+      break;
   }
 });
 
@@ -156,16 +169,3 @@ const initialCards = [
 ];
 
 initialCards.forEach((card) => addCard(card.name, card.link));
-
-const likeBtn = document.querySelector(".gallery__like-btn");
-likeBtn.addEventListener("click", toggleLike);
-
-function toggleLike() {
-  if (likeBtn.classList.contains("gallery__like-btn_active")) {
-    likeBtn.src = " ../images/like.svg";
-  } else {
-    likeBtn.src = " ../images/like-active.svg";
-  }
-
-  likeBtn.classList.toggle("gallery__like-btn_active");
-}
