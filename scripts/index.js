@@ -59,6 +59,35 @@ function toggleAddPopup() {
   popupContent.classList.toggle("popup-form_opened");
 }
 
+const addForm = document.querySelector(".form_add");
+addForm.addEventListener("submit", handleProfileAddFormSubmit);
+
+function handleProfileAddFormSubmit(evt) {
+  evt.preventDefault();
+
+  const title = document.querySelector(".form__input_el_title");
+  const url = document.querySelector(".form__input_el_url");
+
+  addCard(title.value, url.value);
+
+  title.value = "";
+  url.value = "";
+  toggleAddPopup();
+}
+
+function addCard(title, url) {
+  const cardTemplate = document.querySelector("#card-template").content;
+  const cardElement = cardTemplate
+    .querySelector(".gallery__card")
+    .cloneNode(true);
+
+  cardElement.querySelector(".gallery__photo").src = url;
+  cardElement.querySelector(".gallery__photo").alt = `Imagem ${title}`;
+  cardElement.querySelector(".gallery__title").textContent = title;
+
+  gallery.prepend(cardElement);
+}
+
 const gallery = document.querySelector(".gallery");
 gallery.addEventListener("click", (evt) => {
   const targetClass = evt.target.classList[0];
@@ -113,32 +142,6 @@ function createImagePopup(url, title) {
   imagePopupElement.querySelector(".popup-image__title").textContent = title;
 
   popup.after(imagePopupElement);
-}
-
-const addForm = document.querySelector(".form_add");
-addForm.addEventListener("submit", handleProfileAddFormSubmit);
-
-function handleProfileAddFormSubmit(evt) {
-  evt.preventDefault();
-
-  const title = document.querySelector(".form__input_el_title");
-  const url = document.querySelector(".form__input_el_url");
-
-  addCard(title.value, url.value);
-  toggleAddPopup();
-}
-
-function addCard(title, url) {
-  const cardTemplate = document.querySelector("#card-template").content;
-  const cardElement = cardTemplate
-    .querySelector(".gallery__card")
-    .cloneNode(true);
-
-  cardElement.querySelector(".gallery__photo").src = url;
-  cardElement.querySelector(".gallery__photo").alt = `Imagem ${title}`;
-  cardElement.querySelector(".gallery__title").textContent = title;
-
-  gallery.prepend(cardElement);
 }
 
 const initialCards = [
