@@ -116,6 +116,10 @@ gallery.addEventListener("click", (evt) => {
 
       like.classList.toggle("gallery__like-btn_active");
       break;
+
+    default:
+      console.log(`Classe inesperada: ${targetClass}`);
+      break;
   }
 });
 
