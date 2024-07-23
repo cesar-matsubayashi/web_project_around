@@ -29,6 +29,10 @@
   margin-top: 30px;
 }
 
+.form__input_type_error {
+  border-bottom-color: red;
+}
+
 .form__button {
   font-weight: 400;
   font-size: 18px;
