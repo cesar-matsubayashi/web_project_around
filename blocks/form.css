@@ -29,8 +29,18 @@
   margin-top: 30px;
 }
 
+.form__input-error {
+  color: red;
+  font-size: 12px;
+  display: none;
+}
+
 .form__input_type_error {
   border-bottom-color: red;
+}
+
+.form__input-error_active {
+  display: block;
 }
 
 .form__button {
@@ -47,6 +57,16 @@
 
 .form__button:hover {
   opacity: 0.8;
+}
+
+.form__button_disabled {
+  opacity: 20%;
+  color: #000000;
+  background-color: #ffffff;
+}
+
+.form__button_disabled:hover {
+  opacity: 20%;
 }
 
 @media screen and (max-width: 544px) {
