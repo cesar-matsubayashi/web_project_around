@@ -1,6 +1,28 @@
 import { enableValidation, checkInputValidity } from "./validate.js";
 
 const popup = document.querySelector(".popup");
+popup.addEventListener("click", closePopupHandler);
+
+function closePopupHandler() {
+  const formPopups = Array.from(document.querySelectorAll(".popup-form"));
+
+  formPopups.forEach((form) => {
+    form.classList.remove("popup-form_opened");
+    popup.classList.remove("popup_opened");
+  });
+
+  const popupImage = document.querySelector(".popup-image");
+  if (popupImage) {
+    popupImage.remove();
+  }
+}
+
+document.addEventListener("keydown", function (evt) {
+  console.log(evt.key);
+  if (evt.key === "Escape") {
+    closePopupHandler();
+  }
+});
 
 const editBtn = document.querySelector(".profile__edit-btn");
 editBtn.addEventListener("click", toggleEditPopup);
