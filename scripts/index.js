@@ -1,4 +1,4 @@
-import { enableValidation, checkInputValidity } from "./validate.js";
+import { enableValidation, checkInputValidity, configObj } from "./validate.js";
 
 const popup = document.querySelector(".popup");
 popup.addEventListener("click", closePopupHandler);
@@ -46,10 +46,10 @@ function toggleEditPopup() {
 
     name.value = profileName.textContent.trim();
     description.value = profileDescription.textContent;
+
     checkInputValidity(document.forms.edit, name);
     checkInputValidity(document.forms.edit, description);
   }
-  enableValidation();
 }
 
 const editForm = document.querySelector(".form_edit");
@@ -83,7 +83,9 @@ function toggleAddPopup() {
 
   popup.classList.toggle("popup_opened");
   popupContent.classList.toggle("popup-form_opened");
-  enableValidation();
+  document.forms.add.reset();
+
+  enableValidation(configObj);
 }
 
 const addForm = document.querySelector(".form_add");

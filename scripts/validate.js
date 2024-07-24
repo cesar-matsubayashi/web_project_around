@@ -1,4 +1,4 @@
-const configObj = {
+export const configObj = {
   formSelector: ".form",
   fieldsetSelector: ".form__fieldset",
   inputSelector: ".form__input",
@@ -64,7 +64,7 @@ function setEventListeners(formElement) {
   });
 }
 
-export function enableValidation(obj = configObj) {
+export function enableValidation(obj) {
   const formList = Array.from(document.querySelectorAll(".form"));
   formList.forEach((formElement) => {
     formElement.addEventListener("submit", function (evt) {
