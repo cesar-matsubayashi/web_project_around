@@ -18,7 +18,6 @@ function closePopupHandler() {
 }
 
 document.addEventListener("keydown", function (evt) {
-  console.log(evt.key);
   if (evt.key === "Escape") {
     closePopupHandler();
   }
@@ -143,10 +142,6 @@ gallery.addEventListener("click", (evt) => {
       }
 
       like.classList.toggle("gallery__like-btn_active");
-      break;
-
-    default:
-      console.log(`Classe inesperada: ${targetClass}`);
       break;
   }
 });
