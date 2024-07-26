@@ -33,31 +33,26 @@ export class Card {
     this._card
       .querySelector(".gallery__trash")
       .addEventListener("click", (evt) => {
-        console.log(evt.target.classList);
         this._handleDelete();
       });
 
     this._card
       .querySelector(".gallery__like-btn")
       .addEventListener("click", (evt) => {
-        console.log(evt.target.classList);
         this._handleLike();
       });
 
     this._card
       .querySelector(".gallery__photo")
       .addEventListener("click", (evt) => {
-        console.log(evt.target.classList);
         this._handleOpenPopup();
       });
 
     imagePopupClose.addEventListener("click", (evt) => {
-      console.log(evt.target.classList);
       this._handleClosePopup();
     });
 
     popup.addEventListener("click", (evt) => {
-      console.log(evt.target.classList);
       this._handleClosePopup();
     });
   }
