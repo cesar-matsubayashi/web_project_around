@@ -1,5 +1,21 @@
-import { enableValidation, checkInputValidity, configObj } from "./validate.js";
 import { Card } from "./Card.js";
+import { FormValidator } from "./FormValidator.js";
+
+const configObj = {
+  formSelector: ".form",
+  fieldsetSelector: ".form__fieldset",
+  inputSelector: ".form__input",
+  submitButtonSelector: ".form__button",
+  inactiveButtonClass: "form__button_disabled",
+  inputErrorClass: "form__input_type_error",
+  errorClass: "form__input-error_active",
+};
+
+const formList = Array.from(document.querySelectorAll(".form"));
+formList.forEach((form) => {
+  const validator = new FormValidator(configObj, form);
+  validator.enableValidation();
+});
 
 const popup = document.querySelector(".popup");
 popup.addEventListener("click", closePopupHandler);
@@ -8,14 +24,9 @@ function closePopupHandler() {
   const formPopups = Array.from(document.querySelectorAll(".popup-form"));
 
   formPopups.forEach((form) => {
-    form.classList.remove("popup-form_opened");
+    form.classList.remove("popup-form_is-opened");
     popup.classList.remove("popup_is-opened");
   });
-
-  const popupImage = document.querySelector(".popup-image");
-  if (popupImage) {
-    popupImage.remove();
-  }
 }
 
 document.addEventListener("keydown", function (evt) {
@@ -34,7 +45,8 @@ function toggleEditPopup() {
   const popupContent = document.querySelector(".popup-form_edit");
 
   popup.classList.toggle("popup_is-opened");
-  popupContent.classList.toggle("popup-form_opened");
+  popupContent.classList.toggle("popup-form_is-opened");
+  document.forms.edit.reset();
 
   if (popup.classList.contains("popup")) {
     const profileName = document.querySelector(".profile__name");
@@ -47,9 +59,6 @@ function toggleEditPopup() {
 
     name.value = profileName.textContent.trim();
     description.value = profileDescription.textContent;
-
-    checkInputValidity(document.forms.edit, name);
-    checkInputValidity(document.forms.edit, description);
   }
 }
 
@@ -83,10 +92,8 @@ function toggleAddPopup() {
   const popupContent = document.querySelector(".popup-form_add");
 
   popup.classList.toggle("popup_is-opened");
-  popupContent.classList.toggle("popup-form_opened");
+  popupContent.classList.toggle("popup-form_is-opened");
   document.forms.add.reset();
-
-  enableValidation(configObj);
 }
 
 const gallery = document.querySelector(".gallery");

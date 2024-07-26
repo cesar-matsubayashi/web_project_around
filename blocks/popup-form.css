@@ -11,7 +11,7 @@
   display: none;
 }
 
-.popup-form_opened {
+.popup-form_is-opened {
   display: flex;
   flex-direction: column;
 }
