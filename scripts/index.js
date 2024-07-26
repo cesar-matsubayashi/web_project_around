@@ -46,7 +46,7 @@ const initialCards = [
 ];
 
 initialCards.forEach((cardInfo) => {
-  const card = new Card(cardInfo.name, cardInfo.link, "#card-template");
+  const card = new Card(cardInfo, "#card-template");
   const cardElement = card.generateCard();
   gallery.prepend(cardElement);
 });

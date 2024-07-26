@@ -3,9 +3,9 @@ const imagePopup = document.querySelector(".popup-image");
 const imagePopupClose = document.querySelector(".popup-image__close-icon");
 
 export class Card {
-  constructor(title, imageUrl, cardSelector) {
-    this._title = title;
-    this._imageUrl = imageUrl;
+  constructor(cardInfo, cardSelector) {
+    this._title = cardInfo.name;
+    this._imageUrl = cardInfo.link;
     this._cardSelector = cardSelector;
   }
 

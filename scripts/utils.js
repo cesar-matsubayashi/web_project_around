@@ -1,3 +1,5 @@
+import { Card } from "./Card.js";
+
 function openPopupForm(popupSelector) {
   const popupContent = document.querySelector(popupSelector);
 
@@ -73,17 +75,20 @@ addCloseBtn.addEventListener("click", () => {
   closePopupForm(".popup-form_add");
 });
 
-document.forms.add.addEventListener("submit", handleProfileEditFormSubmit);
+document.forms.add.addEventListener("submit", handleProfileAddFormSubmit);
+
 function handleProfileAddFormSubmit(evt) {
   evt.preventDefault();
 
   const formInput = document.forms.add.elements;
-  const title = formInput["title"];
-  const url = formInput["url"];
+  const cardInfo = {};
+  cardInfo.name = formInput["title"].value;
+  cardInfo.link = formInput["url"].value;
 
-  const card = new Card(title.value, url.value, "#card-template");
+  const card = new Card(cardInfo, "#card-template");
   const cardElement = card.generateCard();
 
+  const gallery = document.querySelector(".gallery");
   gallery.prepend(cardElement);
   closePopupForm(".popup-form_add");
 }
