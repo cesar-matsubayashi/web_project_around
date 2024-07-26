@@ -55,6 +55,12 @@ export class Card {
     popup.addEventListener("click", (evt) => {
       this._handleClosePopup();
     });
+
+    document.addEventListener("keydown", (evt) => {
+      if (evt.key === "Escape") {
+        this._handleClosePopup();
+      }
+    });
   }
 
   _handleDelete() {
