@@ -135,6 +135,18 @@
       </form>
     </div>
 
+    <div class="popup-image">
+      <img
+        src="./images/close-icon.svg"
+        alt="Close"
+        class="popup-image__close-icon"
+      />
+
+      <img src=" " alt="" class="popup-image__photo" />
+
+      <p class="popup-image__title"></p>
+    </div>
+
     <template id="card-template">
       <div class="gallery__card">
         <img src=" " alt="" class="gallery__photo" />
@@ -151,21 +163,8 @@
       </div>
     </template>
 
-    <template id="popup-image-template">
-      <div class="popup-image">
-        <img
-          src="./images/close-icon.svg"
-          alt="Close"
-          class="popup-image__close-icon"
-        />
-
-        <img src=" " alt="" class="popup-image__photo" />
-
-        <p class="popup-image__title">Vale de Yosemite</p>
-      </div>
-    </template>
-
     <script src="./scripts/index.js" type="module"></script>
     <script src="./scripts/validate.js" type="module"></script>
+    <script src="./scripts/Card.js" type="module"></script>
   </body>
 </html>

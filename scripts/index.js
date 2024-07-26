@@ -1,4 +1,5 @@
 import { enableValidation, checkInputValidity, configObj } from "./validate.js";
+import { Card } from "./Card.js";
 
 const popup = document.querySelector(".popup");
 popup.addEventListener("click", closePopupHandler);
@@ -8,7 +9,7 @@ function closePopupHandler() {
 
   formPopups.forEach((form) => {
     form.classList.remove("popup-form_opened");
-    popup.classList.remove("popup_opened");
+    popup.classList.remove("popup_is-opened");
   });
 
   const popupImage = document.querySelector(".popup-image");
@@ -32,7 +33,7 @@ editCloseBtn.addEventListener("click", toggleEditPopup);
 function toggleEditPopup() {
   const popupContent = document.querySelector(".popup-form_edit");
 
-  popup.classList.toggle("popup_opened");
+  popup.classList.toggle("popup_is-opened");
   popupContent.classList.toggle("popup-form_opened");
 
   if (popup.classList.contains("popup")) {
@@ -81,13 +82,14 @@ addCloseBtn.addEventListener("click", toggleAddPopup);
 function toggleAddPopup() {
   const popupContent = document.querySelector(".popup-form_add");
 
-  popup.classList.toggle("popup_opened");
+  popup.classList.toggle("popup_is-opened");
   popupContent.classList.toggle("popup-form_opened");
   document.forms.add.reset();
 
   enableValidation(configObj);
 }
 
+const gallery = document.querySelector(".gallery");
 const addForm = document.querySelector(".form_add");
 addForm.addEventListener("submit", handleProfileAddFormSubmit);
 
@@ -97,80 +99,14 @@ function handleProfileAddFormSubmit(evt) {
   const title = document.querySelector(".form__input_el_title");
   const url = document.querySelector(".form__input_el_url");
 
-  addCard(title.value, url.value);
+  const card = new Card(title.value, url.value, "#card-template");
+  const cardElement = card.generateCard();
+
+  gallery.prepend(cardElement);
 
   title.value = "";
   url.value = "";
   toggleAddPopup();
-}
-
-function addCard(title, url) {
-  const cardTemplate = document.querySelector("#card-template").content;
-  const cardElement = cardTemplate
-    .querySelector(".gallery__card")
-    .cloneNode(true);
-
-  cardElement.querySelector(".gallery__photo").src = url;
-  cardElement.querySelector(".gallery__photo").alt = `Imagem ${title}`;
-  cardElement.querySelector(".gallery__title").textContent = title;
-
-  gallery.prepend(cardElement);
-}
-
-const gallery = document.querySelector(".gallery");
-gallery.addEventListener("click", (evt) => {
-  const targetClass = evt.target.classList[0];
-  const card = evt.target.closest(".gallery__card");
-
-  switch (targetClass) {
-    case "gallery__trash":
-      card.remove();
-      break;
-
-    case "gallery__photo":
-      const imageUrl = evt.target.src;
-      const imageTitle = card.querySelector(".gallery__title").textContent;
-      popup.classList.toggle("popup_opened");
-      createImagePopup(imageUrl, imageTitle);
-      break;
-
-    case "gallery__like-btn":
-      const like = evt.target;
-
-      if (like.classList.contains("gallery__like-btn_active")) {
-        like.src = " ../images/like.svg";
-      } else {
-        like.src = " ../images/like-active.svg";
-      }
-
-      like.classList.toggle("gallery__like-btn_active");
-      break;
-  }
-});
-
-function createImagePopup(url, title) {
-  const imagePopupTemplate = document.querySelector(
-    "#popup-image-template"
-  ).content;
-  const imagePopupElement = imagePopupTemplate
-    .querySelector(".popup-image")
-    .cloneNode(true);
-  const imagePopupClose = imagePopupElement.querySelector(
-    ".popup-image__close-icon"
-  );
-
-  imagePopupClose.addEventListener("click", (evt) => {
-    imagePopupElement.remove();
-    popup.classList.toggle("popup_opened");
-  });
-
-  imagePopupElement.querySelector(".popup-image__photo").src = url;
-  imagePopupElement.querySelector(
-    ".popup-image__photo"
-  ).alt = `Imagem ${title}`;
-  imagePopupElement.querySelector(".popup-image__title").textContent = title;
-
-  popup.after(imagePopupElement);
 }
 
 const initialCards = [
@@ -200,4 +136,8 @@ const initialCards = [
   },
 ];
 
-initialCards.forEach((card) => addCard(card.name, card.link));
+initialCards.forEach((cardInfo) => {
+  const card = new Card(cardInfo.name, cardInfo.link, "#card-template");
+  const cardElement = card.generateCard();
+  gallery.prepend(cardElement);
+});

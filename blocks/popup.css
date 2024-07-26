@@ -8,6 +8,6 @@
   display: none;
 }
 
-.popup_opened {
+.popup_is-opened {
   display: flex;
 }
