@@ -63,6 +63,8 @@ export class FormValidator {
     this._form.addEventListener("reset", () => {
       inputList.forEach((inputElement) => {
         this._hideInputError(inputElement);
+        buttonElement.classList.add(this._configObj.inactiveButtonClass);
+        buttonElement.setAttribute("disabled", true);
       });
     });
 
