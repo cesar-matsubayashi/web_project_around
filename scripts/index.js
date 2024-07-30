@@ -1,5 +1,6 @@
 import { Card } from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
+import Section from "./Section.js";
 
 const configObj = {
   formSelector: ".form",
@@ -9,6 +10,8 @@ const configObj = {
   inactiveButtonClass: "form__button_disabled",
   inputErrorClass: "form__input_type_error",
   errorClass: "form__input-error_active",
+  gallerySelector: ".gallery",
+  cardTemplateSelector: "#card-template",
 };
 
 const formList = Array.from(document.querySelectorAll(".form"));
@@ -45,8 +48,17 @@ const initialCards = [
   },
 ];
 
-initialCards.forEach((cardInfo) => {
-  const card = new Card(cardInfo, "#card-template");
-  const cardElement = card.generateCard();
-  gallery.prepend(cardElement);
-});
+const cardList = new Section(
+  {
+    items: initialCards,
+    renderer: (item) => {
+      const card = new Card(item, "#card-template");
+      const cardElement = card.generateCard();
+
+      cardList.addItem(cardElement);
+    },
+  },
+  configObj.gallerySelector
+);
+
+cardList.renderItems();
