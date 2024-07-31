@@ -1,12 +1,13 @@
 const popup = document.querySelector(".popup");
 const imagePopup = document.querySelector(".popup-image");
-const imagePopupClose = document.querySelector(".popup-image__close-icon");
+// const imagePopupClose = document.querySelector(".popup-image__close-icon");
 
 export class Card {
-  constructor(cardInfo, cardSelector) {
+  constructor({ cardInfo, handleCardClick }, cardSelector) {
     this._title = cardInfo.name;
     this._imageUrl = cardInfo.link;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -42,25 +43,26 @@ export class Card {
         this._handleLike();
       });
 
-    this._card
-      .querySelector(".gallery__photo")
-      .addEventListener("click", (evt) => {
-        this._handleOpenPopup();
-      });
+    this._handleCardClick(card);
+    // this._card
+    //   .querySelector(".gallery__photo")
+    //   .addEventListener("click", (evt) => {
+    //     this._handleOpenPopup();
+    //   });
 
-    imagePopupClose.addEventListener("click", (evt) => {
-      this._handleClosePopup();
-    });
+    // imagePopupClose.addEventListener("click", (evt) => {
+    //   this._handleClosePopup();
+    // });
 
-    popup.addEventListener("click", (evt) => {
-      this._handleClosePopup();
-    });
+    // popup.addEventListener("click", (evt) => {
+    //   this._handleClosePopup();
+    // });
 
-    document.addEventListener("keydown", (evt) => {
-      if (evt.key === "Escape") {
-        this._handleClosePopup();
-      }
-    });
+    // document.addEventListener("keydown", (evt) => {
+    //   if (evt.key === "Escape") {
+    //     this._handleClosePopup();
+    //   }
+    // });
   }
 
   _handleDelete() {

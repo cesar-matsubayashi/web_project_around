@@ -43,10 +43,10 @@ editBtn.addEventListener("click", () => {
   description.value = profileDescription.textContent;
 });
 
-const editCloseBtn = document.querySelector(".popup-form__close-icon_edit");
-editCloseBtn.addEventListener("click", () => {
-  closePopupForm(".popup-form_edit");
-});
+// const editCloseBtn = document.querySelector(".popup-form__close-icon_edit");
+// editCloseBtn.addEventListener("click", () => {
+//   closePopupForm(".popup-form_edit");
+// });
 
 document.forms.edit.addEventListener("submit", handleProfileEditFormSubmit);
 function handleProfileEditFormSubmit(evt) {
@@ -70,10 +70,10 @@ addBtn.addEventListener("click", () => {
   openPopupForm(".popup-form_add");
 });
 
-const addCloseBtn = document.querySelector(".popup-form__close-icon_add");
-addCloseBtn.addEventListener("click", () => {
-  closePopupForm(".popup-form_add");
-});
+// const addCloseBtn = document.querySelector(".popup-form__close-icon_add");
+// addCloseBtn.addEventListener("click", () => {
+//   closePopupForm(".popup-form_add");
+// });
 
 document.forms.add.addEventListener("submit", handleProfileAddFormSubmit);
 
