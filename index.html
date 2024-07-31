@@ -57,82 +57,94 @@
       </footer>
     </div>
 
-    <div class="popup"></div>
+    <div class="popup popup_image">
+      <div class="popup__content">
+        <button type="button" class="popup__close"></button>
+        <img src=" " alt="" class="popup__image" />
+        <p class="popup__caption"></p>
+      </div>
+    </div>
 
-    <div class="popup-form popup-form_edit">
+    <!-- <div class="popup-form popup-form_edit">
       <img
         src="./images/close-icon.svg"
         alt="Close"
         class="popup-form__close-icon popup-form__close-icon_edit"
-      />
+      /> -->
+    <div class="popup popup_image">
+      <div class="popup__content">
+        <button type="button" class="popup__close"></button>
+        <form class="form form_edit" name="edit" novalidate>
+          <h2 class="form__title">Editar perfil</h2>
 
-      <form class="form form_edit" name="edit" novalidate>
-        <h2 class="form__title">Editar perfil</h2>
+          <fieldset class="form__fieldset">
+            <input
+              type="text"
+              name="name"
+              id="name-input"
+              class="form__input form__input_el_name"
+              placeholder="Nome"
+              minlength="2"
+              maxlength="40"
+              required
+            />
+            <span class="name-input-error form__input-error"></span>
 
-        <fieldset class="form__fieldset">
-          <input
-            type="text"
-            name="name"
-            id="name-input"
-            class="form__input form__input_el_name"
-            placeholder="Nome"
-            minlength="2"
-            maxlength="40"
-            required
-          />
-          <span class="name-input-error form__input-error"></span>
-
-          <input
-            type="text"
-            name="description"
-            id="description-input"
-            class="form__input form__input_el_description"
-            placeholder="Sobre mim"
-            minlength="2"
-            maxlength="200"
-            required
-          />
-          <span class="description-input-error form__input-error"></span>
-          <button type="submit" class="form__button">Salvar</button>
-        </fieldset>
-      </form>
+            <input
+              type="text"
+              name="description"
+              id="description-input"
+              class="form__input form__input_el_description"
+              placeholder="Sobre mim"
+              minlength="2"
+              maxlength="200"
+              required
+            />
+            <span class="description-input-error form__input-error"></span>
+            <button type="submit" class="form__button">Salvar</button>
+          </fieldset>
+        </form>
+      </div>
     </div>
 
-    <div class="popup-form popup-form_add">
+    <!-- <div class="popup-form popup-form_add">
       <img
         src="./images/close-icon.svg"
         alt="Close"
         class="popup-form__close-icon popup-form__close-icon_add"
-      />
+      /> -->
+    <div class="popup popup_image">
+      <div class="popup__content">
+        <button type="button" class="popup__close"></button>
+        <form class="form form_add" name="add" novalidate>
+          <h2 class="form__title">Novo local</h2>
 
-      <form class="form form_add" name="add" novalidate>
-        <h2 class="form__title">Novo local</h2>
+          <fieldset class="form__fieldset">
+            <input
+              type="text"
+              name="title"
+              id="title-input"
+              class="form__input form__input_el_title"
+              placeholder="Título"
+              minlength="2"
+              maxlength="30"
+              required
+            />
+            <span class="title-input-error form__input-error"></span>
 
-        <fieldset class="form__fieldset">
-          <input
-            type="text"
-            name="title"
-            id="title-input"
-            class="form__input form__input_el_title"
-            placeholder="Título"
-            minlength="2"
-            maxlength="30"
-            required
-          />
-          <span class="title-input-error form__input-error"></span>
-
-          <input
-            type="url"
-            name="url"
-            id="url-input"
-            class="form__input form__input_el_url"
-            placeholder="Link da imagem"
-            required
-          />
-          <span class="url-input-error form__input-error"></span>
-          <button type="submit" class="form__button">Criar</button>
-        </fieldset>
-      </form>
+            <input
+              type="url"
+              name="url"
+              id="url-input"
+              class="form__input form__input_el_url"
+              placeholder="Link da imagem"
+              required
+            />
+            <span class="url-input-error form__input-error"></span>
+            <button type="submit" class="form__button">Criar</button>
+          </fieldset>
+        </form>
+      </div>
     </div>
 
     <div class="popup-image">
