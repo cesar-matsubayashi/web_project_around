@@ -3,9 +3,9 @@ const imagePopup = document.querySelector(".popup-image");
 // const imagePopupClose = document.querySelector(".popup-image__close-icon");
 
 export class Card {
-  constructor({ cardInfo, handleCardClick }, cardSelector) {
-    this._title = cardInfo.name;
-    this._imageUrl = cardInfo.link;
+  constructor({ data, handleCardClick }, cardSelector) {
+    this._title = data.name;
+    this._imageUrl = data.link;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
   }
@@ -43,12 +43,11 @@ export class Card {
         this._handleLike();
       });
 
-    this._handleCardClick(card);
-    // this._card
-    //   .querySelector(".gallery__photo")
-    //   .addEventListener("click", (evt) => {
-    //     this._handleOpenPopup();
-    //   });
+    this._card
+      .querySelector(".gallery__photo")
+      .addEventListener("click", (evt) => {
+        this._handleCardClick(this);
+      });
 
     // imagePopupClose.addEventListener("click", (evt) => {
     //   this._handleClosePopup();
