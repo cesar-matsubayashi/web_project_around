@@ -23,6 +23,10 @@
   cursor: pointer;
 }
 
+.popup__close:hover {
+  opacity: 0.6;
+}
+
 .popup__content {
   max-width: 75vw;
   max-height: 75vh;
