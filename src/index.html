@@ -9,7 +9,6 @@
       content="Página interativa onde os usuários podem adicionar, remover, ou curtir fotos"
     />
     <meta name="keywords" content="EUA, fotos, TripleTen, EUA Afora" />
-    <link rel="stylesheet" href="./pages/index.css" />
     <link rel="shortcut icon" href="favicon.ico" />
     <title>EUA Afora</title>
   </head>
@@ -17,7 +16,7 @@
     <div class="page">
       <header class="header">
         <img
-          src="./images/logo.svg"
+          src="<%= require('./images/logo.svg')%>"
           alt="Logo Around The US."
           class="header__logo"
         />
@@ -25,7 +24,7 @@
 
       <section class="profile">
         <img
-          src="./images/avatar.jpg"
+          src="<%= require('./images/avatar.jpg')%>"
           alt="Profile photo"
           class="profile__photo"
         />
@@ -33,7 +32,7 @@
         <div class="profile__name-container">
           <h1 class="profile__name">Jacques Cousteau</h1>
           <img
-            src="./images/edit-button.svg"
+            src="<%= require('./images/edit-button.svg')%>"
             alt="Edit button"
             class="profile__edit-btn"
           />
@@ -42,7 +41,7 @@
 
         <div class="profile__add-btn">
           <img
-            src="./images/add-btn-sign.svg"
+            src="<%= require('./images/add-btn-sign.svg')%>"
             alt="Adicionar"
             class="profile__add-btn-sign"
           />
@@ -139,18 +138,24 @@
       <div class="gallery__card">
         <img src=" " alt="" class="gallery__photo" />
 
-        <img src="./images/trash.svg" alt="Excluir" class="gallery__trash" />
+        <img
+          src="<%= require('./images/trash.svg')%>"
+          alt="Excluir"
+          class="gallery__trash"
+        />
 
         <ul class="gallery__caption">
           <li class="gallery__title"></li>
 
           <li>
-            <img src="./images/like.svg" alt="Like" class="gallery__like-btn" />
+            <img
+              src="<%= require('./images/like.svg')%>"
+              alt="Like"
+              class="gallery__like-btn"
+            />
           </li>
         </ul>
       </div>
     </template>
-
-    <script src="./scripts/index.js" type="module"></script>
   </body>
 </html>
