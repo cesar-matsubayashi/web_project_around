@@ -65,14 +65,8 @@
       </div>
     </div>
 
-    <!-- <div class="popup-form popup-form_edit">
-      <img
-        src="./images/close-icon.svg"
-        alt="Close"
-        class="popup-form__close-icon popup-form__close-icon_edit"
-      /> -->
-    <div class="popup popup_image">
-      <div class="popup__content">
+    <div class="popup popup_form_edit">
+      <div class="popup__content popup__content_form">
         <button type="button" class="popup__close"></button>
         <form class="form form_edit" name="edit" novalidate>
           <h2 class="form__title">Editar perfil</h2>
@@ -107,14 +101,8 @@
       </div>
     </div>
 
-    <!-- <div class="popup-form popup-form_add">
-      <img
-        src="./images/close-icon.svg"
-        alt="Close"
-        class="popup-form__close-icon popup-form__close-icon_add"
-      /> -->
-    <div class="popup popup_image">
-      <div class="popup__content">
+    <div class="popup popup_form_add">
+      <div class="popup__content popup__content_form">
         <button type="button" class="popup__close"></button>
         <form class="form form_add" name="add" novalidate>
           <h2 class="form__title">Novo local</h2>
@@ -122,41 +110,29 @@
           <fieldset class="form__fieldset">
             <input
               type="text"
-              name="title"
-              id="title-input"
-              class="form__input form__input_el_title"
+              name="name"
+              id="name-input"
+              class="form__input form__input_el_name"
               placeholder="Título"
               minlength="2"
               maxlength="30"
               required
             />
-            <span class="title-input-error form__input-error"></span>
+            <span class="name-input-error form__input-error"></span>
 
             <input
               type="url"
-              name="url"
-              id="url-input"
-              class="form__input form__input_el_url"
+              name="link"
+              id="link-input"
+              class="form__input form__input_el_link"
               placeholder="Link da imagem"
               required
             />
-            <span class="url-input-error form__input-error"></span>
+            <span class="link-input-error form__input-error"></span>
             <button type="submit" class="form__button">Criar</button>
           </fieldset>
         </form>
       </div>
-    </div>
-
-    <div class="popup-image">
-      <img
-        src="./images/close-icon.svg"
-        alt="Close"
-        class="popup-image__close-icon"
-      />
-
-      <img src=" " alt="" class="popup-image__photo" />
-
-      <p class="popup-image__title"></p>
     </div>
 
     <template id="card-template">

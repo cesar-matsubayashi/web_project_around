@@ -40,6 +40,18 @@
   padding: 0;
 }
 
+.popup__content_form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  padding: 34px 36px 36px;
+  font-family: "Inter", sans-serif;
+}
+
 .popup__image {
   max-width: 75vw;
   max-height: 75vh;
