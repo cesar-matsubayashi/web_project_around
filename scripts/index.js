@@ -1,6 +1,9 @@
 import { Card } from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
+import PopupWithForm from "./PopupWithForm.js";
+import PopupWithImage from "./PopupWithImage.js";
 import Section from "./Section.js";
+import UserInfo from "./UserInfo.js";
 
 const configObj = {
   formSelector: ".form",
@@ -48,11 +51,22 @@ const initialCards = [
   },
 ];
 
+const popupImage = new PopupWithImage(".popup_image");
+popupImage.setEventListeners();
+
 const cardList = new Section(
   {
     items: initialCards,
     renderer: (item) => {
-      const card = new Card(item, "#card-template");
+      const card = new Card(
+        {
+          data: item,
+          handleCardClick: () => {
+            popupImage.open(item);
+          },
+        },
+        "#card-template"
+      );
       const cardElement = card.generateCard();
 
       cardList.addItem(cardElement);
@@ -62,3 +76,50 @@ const cardList = new Section(
 );
 
 cardList.renderItems();
+
+const userInfo = new UserInfo({
+  nameSelector: ".profile__name",
+  descriptionSelector: ".profile__description",
+});
+
+const popupFormEdit = new PopupWithForm((inputValues) => {
+  userInfo.setUserInfo({
+    name: inputValues.name,
+    description: inputValues.description,
+  });
+}, ".popup_form_edit");
+popupFormEdit.setEventListeners();
+
+const popupFormAdd = new PopupWithForm((inputValues) => {
+  const card = new Card(
+    {
+      data: inputValues,
+      handleCardClick: () => {
+        popupImage.open(item);
+      },
+    },
+    "#card-template"
+  );
+  const cardElement = card.generateCard();
+  cardList.addItem(cardElement);
+}, ".popup_form_add");
+popupFormAdd.setEventListeners();
+
+const editBtn = document.querySelector(".profile__edit-btn");
+editBtn.addEventListener("click", () => {
+  const info = userInfo.getUserInfo();
+
+  const formInput = document.forms.edit.elements;
+  const name = formInput["name"];
+  const description = formInput["description"];
+
+  name.value = info.name;
+  description.value = info.description;
+
+  popupFormEdit.open();
+});
+
+const addBtn = document.querySelector(".profile__add-btn");
+addBtn.addEventListener("click", () => {
+  popupFormAdd.open();
+});
