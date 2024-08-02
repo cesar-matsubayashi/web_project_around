@@ -95,7 +95,7 @@ const popupFormAdd = new PopupWithForm((inputValues) => {
     {
       data: inputValues,
       handleCardClick: () => {
-        popupImage.open(item);
+        popupImage.open(inputValues);
       },
     },
     "#card-template"
