@@ -1,7 +1,3 @@
-const popup = document.querySelector(".popup");
-const imagePopup = document.querySelector(".popup-image");
-// const imagePopupClose = document.querySelector(".popup-image__close-icon");
-
 export class Card {
   constructor({ data, handleCardClick }, cardSelector) {
     this._title = data.name;
@@ -48,20 +44,6 @@ export class Card {
       .addEventListener("click", (evt) => {
         this._handleCardClick(this);
       });
-
-    // imagePopupClose.addEventListener("click", (evt) => {
-    //   this._handleClosePopup();
-    // });
-
-    // popup.addEventListener("click", (evt) => {
-    //   this._handleClosePopup();
-    // });
-
-    // document.addEventListener("keydown", (evt) => {
-    //   if (evt.key === "Escape") {
-    //     this._handleClosePopup();
-    //   }
-    // });
   }
 
   _handleDelete() {
