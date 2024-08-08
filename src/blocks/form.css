@@ -69,6 +69,10 @@
   opacity: 20%;
 }
 
+.form__button_del-confirm {
+  margin: 38px 0 0;
+}
+
 @media screen and (max-width: 544px) {
   .form {
     width: 238px;
