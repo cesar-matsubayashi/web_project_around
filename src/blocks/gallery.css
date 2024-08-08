@@ -56,6 +56,12 @@
   overflow: hidden;
 }
 
+.gallery__like-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .gallery__like-btn {
   width: 21px;
   height: 19px;
@@ -67,6 +73,12 @@
 
 .gallery__like-btn_active:hover {
   opacity: 100%;
+}
+
+.gallery__like-count {
+  margin: 3px 0 0;
+  color: #000000;
+  font-size: 13px;
 }
 
 @media screen and (max-width: 1024px) {
