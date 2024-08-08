@@ -5,7 +5,7 @@ export default class API {
   }
 
   getUserInfo() {
-    return fetch(`${this._url}//users/me`, this._options).then((res) => {
+    return fetch(`${this._url}/users/me`, this._options).then((res) => {
       if (res.ok) {
         return res.json();
       }

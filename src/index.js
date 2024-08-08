@@ -20,7 +20,7 @@ const configObj = {
 };
 
 const api = new API({
-  baseUrl: "https://around.nomoreparties.co/v1/group-42",
+  baseUrl: "https://placeholder.com/api",
   headers: {
     authorization: "c56e30dc-2883-4270-a59e-b2f7bae969c6",
     "Content-Type": "application/json",
@@ -87,10 +87,26 @@ const cardList = new Section(
 
 cardList.renderItems();
 
+const avatar = document.querySelector(".profile__photo");
 const userInfo = new UserInfo({
   nameSelector: ".profile__name",
   descriptionSelector: ".profile__description",
+  avatarSelector: ".profile__photo",
 });
+
+api
+  .getUserInfo()
+  .then((response) => {
+    userInfo.setUserInfo({
+      name: response.name,
+      description: response.about,
+      avatar: response.avatar,
+      id: response._id,
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 const popupFormEdit = new PopupWithForm((inputValues) => {
   userInfo.setUserInfo({
@@ -119,8 +135,7 @@ const popupFormEditAvatar = new PopupWithForm((inputValue) => {
   api
     .updateProfileAvatar({ avatar: inputValue.link })
     .then((result) => {
-      const avatar = document.querySelector(".profile__photo");
-      avatar.src = result.avatar;
+      userInfo.setUserInfo({ avatar: result.avatar });
     })
     .catch((err) => {
       console.log(err);
