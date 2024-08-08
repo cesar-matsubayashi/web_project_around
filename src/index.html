@@ -28,6 +28,13 @@
           alt="Profile photo"
           class="profile__photo"
         />
+        <div class="profile__avatar-edit">
+          <img
+            src="<%= require('./images/edit-avatar.svg')%>"
+            alt="Editar avatar"
+            class="profile__edit-photo"
+          />
+        </div>
 
         <div class="profile__name-container">
           <h1 class="profile__name">Jacques Cousteau</h1>
@@ -129,6 +136,28 @@
             />
             <span class="link-input-error form__input-error"></span>
             <button type="submit" class="form__button">Criar</button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup popup_form_edit-avatar">
+      <div class="popup__content popup__content_form">
+        <button type="button" class="popup__close"></button>
+        <form class="form form_edit-avatar" name="edit-avatar" novalidate>
+          <h2 class="form__title">Alterar a foto do perfil</h2>
+
+          <fieldset class="form__fieldset">
+            <input
+              type="url"
+              name="link"
+              id="link-input"
+              class="form__input form__input_el_link"
+              placeholder="Link da imagem"
+              required
+            />
+            <span class="link-input-error form__input-error"></span>
+            <button type="submit" class="form__button">Salvar</button>
           </fieldset>
         </form>
       </div>

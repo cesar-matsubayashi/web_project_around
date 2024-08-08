@@ -10,6 +10,25 @@
   border-radius: 50%;
 }
 
+.profile__avatar-edit {
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.8);
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  display: none;
+  width: 120px;
+  height: 120px;
+}
+
+.profile__photo:hover + .profile__avatar-edit {
+  display: flex;
+}
+
+.profile__edit-photo {
+  width: 26px;
+  height: 26px;
+}
 .profile__name-container {
   display: grid;
   grid-template-columns: repeat(2, auto);

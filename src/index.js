@@ -4,6 +4,7 @@ import PopupWithForm from "./components/PopupWithForm.js";
 import PopupWithImage from "./components/PopupWithImage.js";
 import Section from "./components/Section.js";
 import UserInfo from "./components/UserInfo.js";
+import API from "./components/API.js";
 import "./pages/index.css";
 
 const configObj = {
@@ -17,6 +18,14 @@ const configObj = {
   gallerySelector: ".gallery",
   cardTemplateSelector: "#card-template",
 };
+
+const api = new API({
+  baseUrl: "https://around.nomoreparties.co/v1/group-42",
+  headers: {
+    authorization: "c56e30dc-2883-4270-a59e-b2f7bae969c6",
+    "Content-Type": "application/json",
+  },
+});
 
 const formList = Array.from(document.querySelectorAll(".form"));
 formList.forEach((form) => {
@@ -106,6 +115,19 @@ const popupFormAdd = new PopupWithForm((inputValues) => {
 }, ".popup_form_add");
 popupFormAdd.setEventListeners();
 
+const popupFormEditAvatar = new PopupWithForm((inputValue) => {
+  api
+    .updateProfileAvatar({ avatar: inputValue.link })
+    .then((result) => {
+      const avatar = document.querySelector(".profile__photo");
+      avatar.src = result.avatar;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}, ".popup_form_edit-avatar");
+popupFormEditAvatar.setEventListeners();
+
 const editBtn = document.querySelector(".profile__edit-btn");
 editBtn.addEventListener("click", () => {
   const info = userInfo.getUserInfo();
@@ -123,4 +145,9 @@ editBtn.addEventListener("click", () => {
 const addBtn = document.querySelector(".profile__add-btn");
 addBtn.addEventListener("click", () => {
   popupFormAdd.open();
+});
+
+const editAvatarBtn = document.querySelector(".profile__edit-photo");
+editAvatarBtn.addEventListener("click", () => {
+  popupFormEditAvatar.open();
 });
