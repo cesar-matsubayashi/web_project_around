@@ -51,10 +51,15 @@ export default class Card {
   }
 
   _handleLike() {
+    const likeImage = new URL("../images/like.svg", import.meta.url);
+    const likeActiveImage = new URL(
+      "../images/like-active.svg",
+      import.meta.url
+    );
     const like = this._card.querySelector(".gallery__like-btn");
     like.src = like.classList.contains("gallery__like-btn_active")
-      ? " ../images/like.svg"
-      : " ../images/like-active.svg";
+      ? likeImage
+      : likeActiveImage;
 
     like.classList.toggle("gallery__like-btn_active");
   }
