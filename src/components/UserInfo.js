@@ -3,7 +3,6 @@ export default class UserInfo {
     this._name = document.querySelector(data.nameSelector);
     this._description = document.querySelector(data.descriptionSelector);
     this._avatar = document.querySelector(data.avatarSelector);
-    // this._id = data._id;
   }
 
   getUserInfo() {
@@ -11,7 +10,8 @@ export default class UserInfo {
     info.name = this._name.textContent.trim();
     info.description = this._description.textContent;
     info.avatar = this._avatar.src;
-    info.id = this._id;
+    info._id = this._id;
+    info.cohort = this._cohort;
 
     return info;
   }
@@ -30,6 +30,10 @@ export default class UserInfo {
 
     if (data.id) {
       this._id = data._id;
+    }
+
+    if (data.cohort) {
+      this._cohort = data.cohort;
     }
   }
 }
