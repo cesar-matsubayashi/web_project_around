@@ -26,6 +26,8 @@ export default class Card {
     this._card.querySelector(".gallery__photo").src = this._imageUrl;
     this._card.querySelector(".gallery__photo").alt = `Imagem ${this._title}`;
     this._card.querySelector(".gallery__title").textContent = this._title;
+    this._card.querySelector(".gallery__like-count").textContent =
+      this._likes.length;
 
     return this._card;
   }
