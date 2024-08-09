@@ -98,17 +98,24 @@ const popupFormEdit = new PopupWithForm((inputValues) => {
 popupFormEdit.setEventListeners();
 
 const popupFormAdd = new PopupWithForm((inputValues) => {
-  const card = new Card(
-    {
-      data: inputValues,
-      handleCardClick: () => {
-        popupImage.open(inputValues);
-      },
-    },
-    "#card-template"
-  );
-  const cardElement = card.generateCard();
-  cardList.addItem(cardElement);
+  api
+    .addCard(inputValues)
+    .then((response) => {
+      const card = new Card(
+        {
+          data: response,
+          handleCardClick: () => {
+            popupImage.open(inputValues);
+          },
+        },
+        "#card-template"
+      );
+      const cardElement = card.generateCard();
+      cardList.addItem(cardElement);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }, ".popup_form_add");
 popupFormAdd.setEventListeners();
 
