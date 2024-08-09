@@ -2,6 +2,10 @@ export default class Card {
   constructor({ data, handleCardClick }, cardSelector) {
     this._title = data.name;
     this._imageUrl = data.link;
+    this._likes = data.likes;
+    this._id = data._id;
+    this._createdAt = data.createdAt;
+    this._owner = data.owner;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
   }
@@ -62,25 +66,5 @@ export default class Card {
       : likeActiveImage;
 
     like.classList.toggle("gallery__like-btn_active");
-  }
-
-  _handleOpenPopup() {
-    imagePopup.querySelector(".popup-image__photo").src = this._imageUrl;
-    imagePopup.querySelector(
-      ".popup-image__photo"
-    ).alt = `Imagem ${this._title}`;
-    imagePopup.querySelector(".popup-image__title").textContent = this._title;
-
-    popup.classList.add("popup_is-opened");
-    imagePopup.classList.add("popup-image_is-opened");
-  }
-
-  _handleClosePopup() {
-    popup.classList.remove("popup_is-opened");
-    imagePopup.classList.remove("popup-image_is-opened");
-
-    imagePopup.querySelector(".popup-image__photo").src = "";
-    imagePopup.querySelector(".popup-image__photo").alt = "";
-    imagePopup.querySelector(".popup-image__title").textContent = "";
   }
 }

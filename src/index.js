@@ -34,58 +34,39 @@ formList.forEach((form) => {
 });
 
 const gallery = document.querySelector(".gallery");
-const initialCards = [
-  {
-    name: "Vale de Yosemite",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg",
-  },
-  {
-    name: "Lago Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg",
-  },
-  {
-    name: "Montanhas Carecas",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_latemar.jpg",
-  },
-  {
-    name: "Parque Nacional da Vanoise ",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg",
-  },
-];
 
 const popupImage = new PopupWithImage(".popup_image");
 popupImage.setEventListeners();
 
-const cardList = new Section(
-  {
-    items: initialCards,
-    renderer: (item) => {
-      const card = new Card(
-        {
-          data: item,
-          handleCardClick: () => {
-            popupImage.open(item);
-          },
+api
+  .getInitialCards()
+  .then((response) => {
+    const cardList = new Section(
+      {
+        items: response,
+        renderer: (item) => {
+          const card = new Card(
+            {
+              data: item,
+              handleCardClick: () => {
+                popupImage.open(item);
+              },
+            },
+            "#card-template"
+          );
+          const cardElement = card.generateCard();
+
+          cardList.addItem(cardElement);
         },
-        "#card-template"
-      );
-      const cardElement = card.generateCard();
+      },
+      configObj.gallerySelector
+    );
 
-      cardList.addItem(cardElement);
-    },
-  },
-  configObj.gallerySelector
-);
-
-cardList.renderItems();
+    cardList.renderItems();
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 const avatar = document.querySelector(".profile__photo");
 const userInfo = new UserInfo({
@@ -94,19 +75,19 @@ const userInfo = new UserInfo({
   avatarSelector: ".profile__photo",
 });
 
-api
-  .getUserInfo()
-  .then((response) => {
-    userInfo.setUserInfo({
-      name: response.name,
-      description: response.about,
-      avatar: response.avatar,
-      id: response._id,
-    });
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+// api
+//   .getUserInfo()
+//   .then((response) => {
+//     userInfo.setUserInfo({
+//       name: response.name,
+//       description: response.about,
+//       avatar: response.avatar,
+//       id: response._id,
+//     });
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
 
 const popupFormEdit = new PopupWithForm((inputValues) => {
   userInfo.setUserInfo({
