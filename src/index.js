@@ -27,48 +27,6 @@ const api = new API({
   },
 });
 
-const formList = Array.from(document.querySelectorAll(".form"));
-formList.forEach((form) => {
-  const validator = new FormValidator(configObj, form);
-  validator.enableValidation();
-});
-
-const gallery = document.querySelector(".gallery");
-
-const popupImage = new PopupWithImage(".popup_image");
-popupImage.setEventListeners();
-
-api
-  .getInitialCards()
-  .then((response) => {
-    const cardList = new Section(
-      {
-        items: response,
-        renderer: (item) => {
-          const card = new Card(
-            {
-              data: item,
-              handleCardClick: () => {
-                popupImage.open(item);
-              },
-            },
-            "#card-template"
-          );
-          const cardElement = card.generateCard();
-
-          cardList.addItem(cardElement);
-        },
-      },
-      configObj.gallerySelector
-    );
-
-    cardList.renderItems();
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
-const avatar = document.querySelector(".profile__photo");
 const userInfo = new UserInfo({
   nameSelector: ".profile__name",
   descriptionSelector: ".profile__description",
@@ -89,6 +47,63 @@ const userInfo = new UserInfo({
 //     console.log(err);
 //   });
 
+const formList = Array.from(document.querySelectorAll(".form"));
+formList.forEach((form) => {
+  const validator = new FormValidator(configObj, form);
+  validator.enableValidation();
+});
+
+const popupImage = new PopupWithImage(".popup_image");
+popupImage.setEventListeners();
+
+const popupFormConfirm = new PopupWithForm((inputValue) => {
+  api
+    .deleteCard(inputValue.id)
+    .then((response) => {
+      document.querySelector(`#${inputValue.id}`).remove();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}, ".popup_form_confirm");
+popupFormConfirm.setEventListeners();
+
+api
+  .getInitialCards()
+  .then((response) => {
+    const cardList = new Section(
+      {
+        items: response,
+        renderer: (item) => {
+          const card = new Card(
+            {
+              data: item,
+              user: userInfo,
+              handleCardClick: () => {
+                popupImage.open(item);
+              },
+              handleDeleteClick: (cardId) => {
+                const formInput = document.forms.confirm.elements;
+                formInput["id"] = cardId;
+                popupFormConfirm.open();
+              },
+            },
+            "#card-template"
+          );
+          const cardElement = card.generateCard();
+
+          cardList.addItem(cardElement);
+        },
+      },
+      configObj.gallerySelector
+    );
+
+    cardList.renderItems();
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
 const popupFormEdit = new PopupWithForm((inputValues) => {
   userInfo.setUserInfo({
     name: inputValues.name,
@@ -104,6 +119,7 @@ const popupFormAdd = new PopupWithForm((inputValues) => {
       const card = new Card(
         {
           data: response,
+          user: userInfo,
           handleCardClick: () => {
             popupImage.open(inputValues);
           },

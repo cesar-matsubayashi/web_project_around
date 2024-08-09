@@ -1,5 +1,8 @@
 export default class Card {
-  constructor({ data, handleCardClick }, cardSelector) {
+  constructor(
+    { data, user, handleCardClick, handleDeleteClick },
+    cardSelector
+  ) {
     this._title = data.name;
     this._imageUrl = data.link;
     this._likes = data.likes;
@@ -8,6 +11,8 @@ export default class Card {
     this._owner = data.owner;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._handleDeleteClick = handleDeleteClick;
+    this._user = user;
   }
 
   _getTemplate() {
@@ -21,11 +26,18 @@ export default class Card {
 
   generateCard() {
     this._card = this._getTemplate();
+
+    if (user._id !== owner._id) {
+      this._card.querySelector(".gallery__trash").remove();
+    }
+
     this._setEventListeners();
 
+    this._card.querySelector(".gallery__card").id = this._id;
     this._card.querySelector(".gallery__photo").src = this._imageUrl;
     this._card.querySelector(".gallery__photo").alt = `Imagem ${this._title}`;
     this._card.querySelector(".gallery__title").textContent = this._title;
+
     this._card.querySelector(".gallery__like-count").textContent =
       this._likes.length;
 
@@ -33,11 +45,13 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._card
-      .querySelector(".gallery__trash")
-      .addEventListener("click", (evt) => {
-        this._handleDelete();
-      });
+    if (!this._card.querySelector(".gallery__trash")) {
+      this._card
+        .querySelector(".gallery__trash")
+        .addEventListener("click", (evt) => {
+          this._handleDeleteClick(this._card._id);
+        });
+    }
 
     this._card
       .querySelector(".gallery__like-btn")

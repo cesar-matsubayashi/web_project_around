@@ -163,22 +163,31 @@
       </div>
     </div>
 
-    <div class="popup popup_form_del-confirm">
+    <div class="popup popup_form_confirm">
       <div class="popup__content popup__content_form">
         <button type="button" class="popup__close"></button>
 
-        <form class="form form_del-confirm" name="del-confirm" novalidate>
+        <form class="form form_confirm" name="confirm" novalidate>
           <h2 class="form__title">Tem certeza?</h2>
 
-          <button type="submit" class="form__button form__button_del-confirm">
-            Sim
-          </button>
+          <fieldset class="form__fieldset">
+            <input
+              type="text"
+              name="id"
+              id="id-input"
+              class="form__input id"
+              placeholder="id do cartão"
+              required
+            />
+            <span class="id-input-error form__input-error"></span>
+            <button type="submit" class="form__button">Sim</button>
+          </fieldset>
         </form>
       </div>
     </div>
 
     <template id="card-template">
-      <div class="gallery__card">
+      <div class="gallery__card" id="">
         <img src=" " alt="" class="gallery__photo" />
 
         <img

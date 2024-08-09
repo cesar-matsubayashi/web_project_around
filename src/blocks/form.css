@@ -33,6 +33,10 @@
   margin-top: 0;
 }
 
+.form__input_el_id {
+  display: none;
+}
+
 .form__input-error {
   color: red;
   font-size: 12px;
