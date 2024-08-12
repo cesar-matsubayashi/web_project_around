@@ -1,6 +1,6 @@
 export default class Card {
   constructor(
-    { data, user, handleCardClick, handleDeleteClick },
+    { data, user, handleCardClick, handleDeleteClick, handleLikeClick },
     cardSelector
   ) {
     this._title = data.name;
@@ -12,6 +12,7 @@ export default class Card {
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._handleDeleteClick = handleDeleteClick;
+    this._handleLikeClick = handleLikeClick;
     this._user = user;
   }
 
@@ -56,7 +57,7 @@ export default class Card {
     this._card
       .querySelector(".gallery__like-btn")
       .addEventListener("click", (evt) => {
-        this._handleLike();
+        this._handleLikeClick(this._card._id);
       });
 
     this._card

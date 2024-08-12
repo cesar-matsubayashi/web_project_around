@@ -33,19 +33,19 @@ const userInfo = new UserInfo({
   avatarSelector: ".profile__photo",
 });
 
-// api
-//   .getUserInfo()
-//   .then((response) => {
-//     userInfo.setUserInfo({
-//       name: response.name,
-//       description: response.about,
-//       avatar: response.avatar,
-//       id: response._id,
-//     });
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
+api
+  .getUserInfo()
+  .then((response) => {
+    userInfo.setUserInfo({
+      name: response.name,
+      description: response.about,
+      avatar: response.avatar,
+      id: response._id,
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 const formList = Array.from(document.querySelectorAll(".form"));
 formList.forEach((form) => {
@@ -86,6 +86,39 @@ api
                 const formInput = document.forms.confirm.elements;
                 formInput["id"] = cardId;
                 popupFormConfirm.open();
+              },
+              handleLikeClick: (cardId) => {
+                const likeImage = new URL("./images/like.svg", import.meta.url);
+                const likeActiveImage = new URL(
+                  "./images/like-active.svg",
+                  import.meta.url
+                );
+                const like = document.querySelector(".gallery__like-btn");
+                const likeCount = document.querySelector(
+                  ".gallery__like-count"
+                );
+
+                if (like.classList.contains("gallery__like-btn_active")) {
+                  api
+                    .dislikeCard(cardId)
+                    .then((response) => {
+                      like.src = likeImage;
+                      likeCount.textContent = response.likes.length;
+                    })
+                    .catch((err) => {
+                      console.log(err);
+                    });
+                } else {
+                  api
+                    .likeCard(cardId)
+                    .then((response) => {
+                      like.src = likeActiveImage;
+                      likeCount.textContent = response.likes.length;
+                    })
+                    .catch((err) => {
+                      console.log(err);
+                    });
+                }
               },
             },
             "#card-template"
