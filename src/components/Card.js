@@ -28,7 +28,6 @@ export default class Card {
   generateCard() {
     this._card = this._getTemplate();
 
-    console.log(this._user);
     if (this._user.id !== this._owner._id) {
       this._card.querySelector(".gallery__trash").remove();
     }
