@@ -9,8 +9,15 @@ export default class Section {
     this._container.prepend(element);
   }
 
+  removeItem(elementId) {
+    const index = this._renderedItems
+      .reverse()
+      .findIndex((element) => element._id === elementId);
+    this._container.removeChild(this._container.children[index]);
+  }
+
   renderItems() {
-    this._renderedItems.forEach((item) => {
+    this._renderedItems.reverse().forEach((item) => {
       this._renderer(item);
     });
   }
