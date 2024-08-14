@@ -28,13 +28,14 @@ export default class Card {
   generateCard() {
     this._card = this._getTemplate();
 
-    if (user._id !== owner._id) {
+    console.log(this._user);
+    if (this._user.id !== this._owner._id) {
       this._card.querySelector(".gallery__trash").remove();
     }
 
     this._setEventListeners();
 
-    this._card.querySelector(".gallery__card").id = this._id;
+    this._card.id = this._id;
     this._card.querySelector(".gallery__photo").src = this._imageUrl;
     this._card.querySelector(".gallery__photo").alt = `Imagem ${this._title}`;
     this._card.querySelector(".gallery__title").textContent = this._title;
