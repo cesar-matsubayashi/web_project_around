@@ -87,7 +87,7 @@ export default class API {
     this._options.method = "PATCH";
     this._options.body = JSON.stringify(avatarLink);
 
-    return fetch(`${this._url}/users/me`, this._options).then((res) => {
+    return fetch(`${this._url}/users/me/avatar`, this._options).then((res) => {
       if (res.ok) {
         return res.json();
       }
