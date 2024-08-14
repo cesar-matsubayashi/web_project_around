@@ -1,16 +1,13 @@
 # Tripleten Around The US
 
-A página mostra uma galeria de fotos que podem ser adiciondas, alteradas, excluidas e curtidas. Também é possível alterar o nome e a descrição do perfil.
+A página mostra uma galeria de fotos que podem ser adiciondas e curtidas. A deleção de fotos só pode ser feita pela pessoa que adicionou. Também é possível alterar o nome, descrição e avatar do perfil.
 
 Tecnologias:
 
 - HTML
 - CSS
 - Javascript
-
-# Planos de melhoria
-
-Adicionar opção para mudar a foto do perfil.
+- Webpack
 
 # Link para GitHub Pages
 
