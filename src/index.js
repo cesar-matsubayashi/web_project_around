@@ -20,16 +20,16 @@ const configObj = {
 };
 
 const api = new API({
-  baseUrl: "https://placeholder.com/api",
+  baseUrl: "https://around.nomoreparties.co/v1/web-ptbr-cohort-14",
   headers: {
-    authorization: "c56e30dc-2883-4270-a59e-b2f7bae969c6",
+    authorization: "e255bcaf-9aa3-4e45-a23a-da684d7fa67f",
     "Content-Type": "application/json",
   },
 });
 
 const userInfo = new UserInfo({
   nameSelector: ".profile__name",
-  descriptionSelector: ".profile__description",
+  aboutSelector: ".profile__about",
   avatarSelector: ".profile__photo",
 });
 
@@ -38,7 +38,7 @@ api
   .then((response) => {
     userInfo.setUserInfo({
       name: response.name,
-      description: response.about,
+      about: response.about,
       avatar: response.avatar,
       id: response._id,
     });
@@ -146,10 +146,15 @@ api
 const popupFormEdit = new PopupWithForm(
   {
     submit: (inputValues) => {
-      userInfo.setUserInfo({
-        name: inputValues.name,
-        description: inputValues.description,
-      });
+      api
+        .updateUserInfo(inputValues)
+        .then((response) => {
+          userInfo.setUserInfo({
+            name: response.name,
+            about: response.about,
+          });
+        })
+        .catch((err) => console.log(err));
     },
     loadingText: "Salvar...",
   },
@@ -210,10 +215,10 @@ editBtn.addEventListener("click", () => {
 
   const formInput = document.forms.edit.elements;
   const name = formInput["name"];
-  const description = formInput["description"];
+  const about = formInput["about"];
 
   name.value = info.name;
-  description.value = info.description;
+  about.value = info.about;
 
   popupFormEdit.open();
 });

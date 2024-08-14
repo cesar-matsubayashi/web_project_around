@@ -1,14 +1,14 @@
 export default class UserInfo {
   constructor(data) {
     this._name = document.querySelector(data.nameSelector);
-    this._description = document.querySelector(data.descriptionSelector);
+    this._about = document.querySelector(data.aboutSelector);
     this._avatar = document.querySelector(data.avatarSelector);
   }
 
   getUserInfo() {
     const info = {};
     info.name = this._name.textContent.trim();
-    info.description = this._description.textContent;
+    info.about = this._about.textContent;
     info.avatar = this._avatar.src;
     info._id = this._id;
     info.cohort = this._cohort;
@@ -21,8 +21,8 @@ export default class UserInfo {
       this._name.textContent = data.name;
     }
 
-    if (data.description) {
-      this._description.textContent = data.description;
+    if (data.about) {
+      this._about.textContent = data.about;
     }
     if (data.avatar) {
       this._avatar.src = data.avatar;
