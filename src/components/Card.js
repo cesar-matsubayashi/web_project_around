@@ -43,7 +43,37 @@ export default class Card {
     this._card.querySelector(".gallery__like-count").textContent =
       this._likes.length;
 
+    this._setLikeIcon();
+
     return this._card;
+  }
+
+  _setLikeIcon() {
+    const like = this._card.querySelector(".gallery__like-btn");
+    const likeInactiveImage = new URL("../images/like.svg", import.meta.url);
+    const likeActiveImage = new URL(
+      "../images/like-active.svg",
+      import.meta.url
+    );
+
+    if (this.isUserLiked()) {
+      like.src = likeActiveImage;
+      like.classList.add("gallery__like-btn_active");
+    } else {
+      like.src = likeInactiveImage;
+      like.classList.remove("gallery__like-btn_active");
+    }
+  }
+
+  isUserLiked() {
+    return this._likes.some((user) => user._id === this._user.id);
+  }
+
+  like(likes) {
+    const likeCount = this._card.querySelector(".gallery__like-count");
+    likeCount.textContent = likes.length;
+    this._likes = likes;
+    this._setLikeIcon();
   }
 
   _setEventListeners() {
@@ -58,7 +88,7 @@ export default class Card {
     this._card
       .querySelector(".gallery__like-btn")
       .addEventListener("click", (evt) => {
-        this._handleLikeClick(this._card._id);
+        this._handleLikeClick(evt.currentTarget.offsetParent.id);
       });
 
     this._card
@@ -70,19 +100,5 @@ export default class Card {
 
   _handleDelete() {
     this._card.remove();
-  }
-
-  _handleLike() {
-    const likeImage = new URL("../images/like.svg", import.meta.url);
-    const likeActiveImage = new URL(
-      "../images/like-active.svg",
-      import.meta.url
-    );
-    const like = this._card.querySelector(".gallery__like-btn");
-    like.src = like.classList.contains("gallery__like-btn_active")
-      ? likeImage
-      : likeActiveImage;
-
-    like.classList.toggle("gallery__like-btn_active");
   }
 }

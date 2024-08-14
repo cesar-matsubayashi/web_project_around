@@ -65,40 +65,16 @@ api
                     popupFormConfirm.open();
                   },
                   handleLikeClick: (cardId) => {
-                    const likeImage = new URL(
-                      "./images/like.svg",
-                      import.meta.url
-                    );
-                    const likeActiveImage = new URL(
-                      "./images/like-active.svg",
-                      import.meta.url
-                    );
-                    const like = document.querySelector(".gallery__like-btn");
-                    const likeCount = document.querySelector(
-                      ".gallery__like-count"
-                    );
+                    const method = card.isUserLiked() ? "DELETE" : "PUT";
 
-                    if (like.classList.contains("gallery__like-btn_active")) {
-                      api
-                        .dislikeCard(cardId)
-                        .then((response) => {
-                          like.src = likeImage;
-                          likeCount.textContent = response.likes.length;
-                        })
-                        .catch((err) => {
-                          console.log(err);
-                        });
-                    } else {
-                      api
-                        .likeCard(cardId)
-                        .then((response) => {
-                          like.src = likeActiveImage;
-                          likeCount.textContent = response.likes.length;
-                        })
-                        .catch((err) => {
-                          console.log(err);
-                        });
-                    }
+                    api
+                      .likeCard(cardId, method)
+                      .then((response) => {
+                        card.like(response.likes);
+                      })
+                      .catch((err) => {
+                        console.log(err);
+                      });
                   },
                 },
                 "#card-template"

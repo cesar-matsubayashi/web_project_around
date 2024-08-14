@@ -57,21 +57,8 @@ export default class API {
     });
   }
 
-  likeCard(cardId) {
-    this._options.method = "PUT";
-
-    return fetch(`${this._url}/cards/likes/${cardId}`, this._options).then(
-      (res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Error: ${res.status}`);
-      }
-    );
-  }
-
-  dislikeCard(cardId) {
-    this._options.method = "DELETE";
+  likeCard(cardId, method) {
+    this._options.method = method;
 
     return fetch(`${this._url}/cards/likes/${cardId}`, this._options).then(
       (res) => {
