@@ -41,7 +41,81 @@ api
       about: response.about,
       avatar: response.avatar,
       id: response._id,
+      cohort: response.cohort,
     });
+  })
+  .then((response) => {
+    api
+      .getInitialCards()
+      .then((response) => {
+        const cardList = new Section(
+          {
+            items: response,
+            renderer: (item) => {
+              const card = new Card(
+                {
+                  data: item,
+                  user: userInfo.getUserInfo(),
+                  handleCardClick: () => {
+                    popupImage.open(item);
+                  },
+                  handleDeleteClick: (cardId) => {
+                    const formInput = document.forms.confirm.elements;
+                    formInput["id"] = cardId;
+                    popupFormConfirm.open();
+                  },
+                  handleLikeClick: (cardId) => {
+                    const likeImage = new URL(
+                      "./images/like.svg",
+                      import.meta.url
+                    );
+                    const likeActiveImage = new URL(
+                      "./images/like-active.svg",
+                      import.meta.url
+                    );
+                    const like = document.querySelector(".gallery__like-btn");
+                    const likeCount = document.querySelector(
+                      ".gallery__like-count"
+                    );
+
+                    if (like.classList.contains("gallery__like-btn_active")) {
+                      api
+                        .dislikeCard(cardId)
+                        .then((response) => {
+                          like.src = likeImage;
+                          likeCount.textContent = response.likes.length;
+                        })
+                        .catch((err) => {
+                          console.log(err);
+                        });
+                    } else {
+                      api
+                        .likeCard(cardId)
+                        .then((response) => {
+                          like.src = likeActiveImage;
+                          likeCount.textContent = response.likes.length;
+                        })
+                        .catch((err) => {
+                          console.log(err);
+                        });
+                    }
+                  },
+                },
+                "#card-template"
+              );
+              const cardElement = card.generateCard();
+
+              cardList.addItem(cardElement);
+            },
+          },
+          configObj.gallerySelector
+        );
+
+        cardList.renderItems();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   })
   .catch((err) => {
     console.log(err);
@@ -73,75 +147,6 @@ const popupFormConfirm = new PopupWithForm(
   ".popup_form_confirm"
 );
 popupFormConfirm.setEventListeners();
-
-api
-  .getInitialCards()
-  .then((response) => {
-    const cardList = new Section(
-      {
-        items: response,
-        renderer: (item) => {
-          const card = new Card(
-            {
-              data: item,
-              user: userInfo,
-              handleCardClick: () => {
-                popupImage.open(item);
-              },
-              handleDeleteClick: (cardId) => {
-                const formInput = document.forms.confirm.elements;
-                formInput["id"] = cardId;
-                popupFormConfirm.open();
-              },
-              handleLikeClick: (cardId) => {
-                const likeImage = new URL("./images/like.svg", import.meta.url);
-                const likeActiveImage = new URL(
-                  "./images/like-active.svg",
-                  import.meta.url
-                );
-                const like = document.querySelector(".gallery__like-btn");
-                const likeCount = document.querySelector(
-                  ".gallery__like-count"
-                );
-
-                if (like.classList.contains("gallery__like-btn_active")) {
-                  api
-                    .dislikeCard(cardId)
-                    .then((response) => {
-                      like.src = likeImage;
-                      likeCount.textContent = response.likes.length;
-                    })
-                    .catch((err) => {
-                      console.log(err);
-                    });
-                } else {
-                  api
-                    .likeCard(cardId)
-                    .then((response) => {
-                      like.src = likeActiveImage;
-                      likeCount.textContent = response.likes.length;
-                    })
-                    .catch((err) => {
-                      console.log(err);
-                    });
-                }
-              },
-            },
-            "#card-template"
-          );
-          const cardElement = card.generateCard();
-
-          cardList.addItem(cardElement);
-        },
-      },
-      configObj.gallerySelector
-    );
-
-    cardList.renderItems();
-  })
-  .catch((err) => {
-    console.log(err);
-  });
 
 const popupFormEdit = new PopupWithForm(
   {
