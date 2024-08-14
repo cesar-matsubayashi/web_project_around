@@ -34,7 +34,7 @@ export default class Card {
 
     this._setEventListeners();
 
-    this._card.id = this._id;
+    // this._card.id = this._id;
     this._card.querySelector(".gallery__photo").src = this._imageUrl;
     this._card.querySelector(".gallery__photo").alt = `Imagem ${this._title}`;
     this._card.querySelector(".gallery__title").textContent = this._title;
@@ -76,18 +76,18 @@ export default class Card {
   }
 
   _setEventListeners() {
-    if (!this._card.querySelector(".gallery__trash")) {
+    if (this._card.querySelector(".gallery__trash")) {
       this._card
         .querySelector(".gallery__trash")
         .addEventListener("click", (evt) => {
-          this._handleDeleteClick(this._card._id);
+          this._handleDeleteClick(this._id);
         });
     }
 
     this._card
       .querySelector(".gallery__like-btn")
       .addEventListener("click", (evt) => {
-        this._handleLikeClick(evt.currentTarget.offsetParent.id);
+        this._handleLikeClick(this._id);
       });
 
     this._card

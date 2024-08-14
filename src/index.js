@@ -78,8 +78,8 @@ function addCard(data) {
         popupImage.open(data);
       },
       handleDeleteClick: (cardId) => {
-        const formInput = document.forms.confirm.elements;
-        formInput["id"] = cardId;
+        const input = document.forms.confirm.elements;
+        input["id"].value = cardId;
         popupFormConfirm.open();
       },
       handleLikeClick: (cardId) => {
@@ -104,7 +104,10 @@ function addCard(data) {
   return card;
 }
 
-const formList = Array.from(document.querySelectorAll(".form"));
+const formList = Array.from(document.querySelectorAll(".form")).filter(
+  (form) => form.name !== "confirm"
+);
+
 formList.forEach((form) => {
   const validator = new FormValidator(configObj, form);
   validator.enableValidation();
@@ -119,7 +122,7 @@ const popupFormConfirm = new PopupWithForm(
       api
         .deleteCard(inputValue.id)
         .then(() => {
-          document.querySelector(`#${inputValue.id}`).remove();
+          cardList.removeItem(inputValue.id);
         })
         .catch((err) => {
           console.log(err);
