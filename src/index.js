@@ -32,6 +32,7 @@ const userInfo = new UserInfo({
   aboutSelector: ".profile__about",
   avatarSelector: ".profile__photo",
 });
+let cardList;
 
 api
   .getUserInfo()
@@ -48,40 +49,11 @@ api
     api
       .getInitialCards()
       .then((response) => {
-        const cardList = new Section(
+        cardList = new Section(
           {
             items: response,
             renderer: (item) => {
-              const card = new Card(
-                {
-                  data: item,
-                  user: userInfo.getUserInfo(),
-                  handleCardClick: () => {
-                    popupImage.open(item);
-                  },
-                  handleDeleteClick: (cardId) => {
-                    const formInput = document.forms.confirm.elements;
-                    formInput["id"] = cardId;
-                    popupFormConfirm.open();
-                  },
-                  handleLikeClick: (cardId) => {
-                    const method = card.isUserLiked() ? "DELETE" : "PUT";
-
-                    api
-                      .likeCard(cardId, method)
-                      .then((response) => {
-                        card.like(response.likes);
-                      })
-                      .catch((err) => {
-                        console.log(err);
-                      });
-                  },
-                },
-                "#card-template"
-              );
-              const cardElement = card.generateCard();
-
-              cardList.addItem(cardElement);
+              addCard(item);
             },
           },
           configObj.gallerySelector
@@ -97,6 +69,41 @@ api
     console.log(err);
   });
 
+function addCard(data) {
+  const card = new Card(
+    {
+      data: data,
+      user: userInfo.getUserInfo(),
+      handleCardClick: () => {
+        popupImage.open(data);
+      },
+      handleDeleteClick: (cardId) => {
+        const formInput = document.forms.confirm.elements;
+        formInput["id"] = cardId;
+        popupFormConfirm.open();
+      },
+      handleLikeClick: (cardId) => {
+        const method = card.isUserLiked() ? "DELETE" : "PUT";
+
+        api
+          .likeCard(cardId, method)
+          .then((response) => {
+            card.like(response.likes);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      },
+    },
+    "#card-template"
+  );
+
+  const cardElement = card.generateCard();
+  cardList.addItem(cardElement);
+
+  return card;
+}
+
 const formList = Array.from(document.querySelectorAll(".form"));
 formList.forEach((form) => {
   const validator = new FormValidator(configObj, form);
@@ -111,7 +118,7 @@ const popupFormConfirm = new PopupWithForm(
     submit: (inputValue) => {
       api
         .deleteCard(inputValue.id)
-        .then((response) => {
+        .then(() => {
           document.querySelector(`#${inputValue.id}`).remove();
         })
         .catch((err) => {
@@ -149,18 +156,7 @@ const popupFormAdd = new PopupWithForm(
       api
         .addCard(inputValues)
         .then((response) => {
-          const card = new Card(
-            {
-              data: response,
-              user: userInfo,
-              handleCardClick: () => {
-                popupImage.open(inputValues);
-              },
-            },
-            "#card-template"
-          );
-          const cardElement = card.generateCard();
-          cardList.addItem(cardElement);
+          addCard(response);
         })
         .catch((err) => {
           console.log(err);
