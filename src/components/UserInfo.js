@@ -10,7 +10,7 @@ export default class UserInfo {
     info.name = this._name.textContent.trim();
     info.about = this._about.textContent;
     info.avatar = this._avatar.src;
-    info._id = this._id;
+    info.id = this._id;
     info.cohort = this._cohort;
 
     return info;
@@ -29,7 +29,7 @@ export default class UserInfo {
     }
 
     if (data.id) {
-      this._id = data._id;
+      this._id = data.id;
     }
 
     if (data.cohort) {
