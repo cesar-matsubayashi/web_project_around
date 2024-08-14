@@ -14,9 +14,9 @@ export default class PopupWithForm extends Popup {
   }
 
   _getInputValues() {
-    const inputs = Array.from(this._form.elements);
-    inputs.filter((element) => {
-      return element.nodeName !== "BUTTON";
+    const elements = Array.from(this._form.elements);
+    const inputs = elements.filter((element) => {
+      return element.tagName === "INPUT";
     });
 
     this._formValues = {};
@@ -32,7 +32,7 @@ export default class PopupWithForm extends Popup {
 
     this._form.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      this._form.elements.submit.value = loadingText;
+      this._form.elements.submit.textContent = this._loadingText;
       this._submit(this._getInputValues());
       this.close();
     });
