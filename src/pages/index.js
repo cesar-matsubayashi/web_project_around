@@ -23,7 +23,6 @@ const api = new API({
   baseUrl: "https://around.nomoreparties.co/v1/web-ptbr-cohort-14",
   headers: {
     authorization: "e255bcaf-9aa3-4e45-a23a-da684d7fa67f",
-    "Content-Type": "application/json",
   },
 });
 
@@ -45,7 +44,7 @@ api
       cohort: response.cohort,
     });
   })
-  .then((response) => {
+  .then(() => {
     api
       .getInitialCards()
       .then((response) => {

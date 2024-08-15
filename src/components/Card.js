@@ -34,7 +34,6 @@ export default class Card {
 
     this._setEventListeners();
 
-    // this._card.id = this._id;
     this._card.querySelector(".gallery__photo").src = this._imageUrl;
     this._card.querySelector(".gallery__photo").alt = `Imagem ${this._title}`;
     this._card.querySelector(".gallery__title").textContent = this._title;
@@ -95,9 +94,5 @@ export default class Card {
       .addEventListener("click", (evt) => {
         this._handleCardClick(this);
       });
-  }
-
-  _handleDelete() {
-    this._card.remove();
   }
 }
