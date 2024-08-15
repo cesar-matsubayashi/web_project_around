@@ -1,84 +1,53 @@
 export default class API {
   constructor(options) {
     this._url = options.baseUrl;
-    this._options = { headers: options.headers };
+    this._headers = options.headers;
+  }
+
+  _makeRequest(endpoint, method = "GET", body = null) {
+    const options = {
+      method: method,
+      headers: this._headers,
+    };
+
+    if (body) {
+      options.headers["Content-Type"] = "application/json";
+      options.body = JSON.stringify(body);
+    }
+
+    return fetch(`${this._url}${endpoint}`, options).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    });
   }
 
   getUserInfo() {
-    return fetch(`${this._url}/users/me`, this._options).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    return this._makeRequest("/users/me");
   }
 
   updateUserInfo(userInfo) {
-    this._options.method = "PATCH";
-    this._options.body = JSON.stringify(userInfo);
-
-    return fetch(`${this._url}/users/me`, this._options).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    return this._makeRequest("/users/me", "PATCH", userInfo);
   }
 
   getInitialCards() {
-    return fetch(`${this._url}/cards`, this._options).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    return this._makeRequest("/cards");
   }
 
   addCard(cardInfo) {
-    this._options.method = "POST";
-    this._options.body = JSON.stringify(cardInfo);
-
-    return fetch(`${this._url}/cards`, this._options).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    return this._makeRequest("/cards", "POST", cardInfo);
   }
 
   deleteCard(cardId) {
-    this._options.method = "DELETE";
-
-    return fetch(`${this._url}/cards/${cardId}`, this._options).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    return this._makeRequest(`/cards/${cardId}`, "DELETE");
   }
 
   likeCard(cardId, method) {
-    this._options.method = method;
-
-    return fetch(`${this._url}/cards/likes/${cardId}`, this._options).then(
-      (res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Error: ${res.status}`);
-      }
-    );
+    return this._makeRequest(`/cards/likes/${cardId}`, method);
   }
 
   updateProfileAvatar(avatarLink) {
-    this._options.method = "PATCH";
-    this._options.body = JSON.stringify(avatarLink);
-
-    return fetch(`${this._url}/users/me/avatar`, this._options).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    return this._makeRequest("/users/me/avatar", "PATCH", avatarLink);
   }
 }
